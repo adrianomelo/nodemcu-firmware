@@ -19,6 +19,11 @@ Arithmetic right shift a number equivalent to `value >> shift` in C.
 #### Returns
 the number shifted right (arithmetically)
 
+#### Example
+```lua
+print(bit.arshift(3, 1) == 1)
+```
+
 ## bit.band()
 
 Bitwise AND, equivalent to `val1 & val2 & ... & valn` in C.
@@ -34,6 +39,11 @@ Bitwise AND, equivalent to `val1 & val2 & ... & valn` in C.
 #### Returns
 the bitwise AND of all the arguments (number)
 
+### Example
+```lua
+print(bit.band(3, 2) == 2)
+```
+
 ## bit.bit()
 
 Generate a number with a 1 bit (used for mask generation). Equivalent to `1 << position` in C.
@@ -46,6 +56,11 @@ Generate a number with a 1 bit (used for mask generation). Equivalent to `1 << p
 
 #### Returns
 a number with only one 1 bit at position (the rest are set to 0)
+
+### Example
+```lua
+print(bit.bit(4) == 16)
+```
 
 ## bit.bnot()
 
@@ -74,6 +89,11 @@ Bitwise OR, equivalent to `val1 | val2 | ... | valn` in C.
 #### Returns
 the bitwise OR of all the arguments (number)
 
+### Example
+```lua
+print(bit.bor(3, 2) == 3)
+```
+
 ## bit.bxor()
 
 Bitwise XOR, equivalent to `val1 ^ val2 ^ ... ^ valn` in C.
@@ -89,6 +109,11 @@ Bitwise XOR, equivalent to `val1 ^ val2 ^ ... ^ valn` in C.
 #### Returns
 the bitwise XOR of all the arguments (number)
 
+### Example
+```lua
+print(bit.bxor(3, 2) == 1)
+```
+
 ## bit.clear()
 Clear bits in a number.
 
@@ -103,8 +128,12 @@ Clear bits in a number.
 #### Returns
 the number with the bit(s) cleared in the given position(s)
 
-## bit.isclear()
+### Example
+```lua
+print(bit.clear(3, 0) == 2)
+```
 
+## bit.isclear()
 Test if a given bit is cleared.
 
 #### Syntax
@@ -116,6 +145,11 @@ Test if a given bit is cleared.
 
 #### Returns
 true if the bit at the given position is 0, false othewise
+
+### Example
+```lua
+print(bit.isclear(2, 0) == true)
+```
 
 ## bit.isset()
 
@@ -131,6 +165,11 @@ Test if a given bit is set.
 #### Returns
 true if the bit at the given position is 1, false otherwise
 
+### Example
+```lua
+print(bit.isset(2, 0) == false)
+```
+
 ## bit.lshift()
 Left-shift a number, equivalent to `value << shift` in C.
 
@@ -143,6 +182,11 @@ Left-shift a number, equivalent to `value << shift` in C.
 
 #### Returns
 the number shifted left
+
+### Example
+```lua
+print(bit.lshift(2, 2) == 8)
+```
 
 ## bit.rshift()
 
@@ -158,6 +202,11 @@ Logical right shift a number, equivalent to `( unsigned )value >> shift` in C.
 #### Returns
 the number shifted right (logically)
 
+### Example
+```lua
+print(bit.rshift(2, 1) == 1)
+```
+
 ## bit.set()
 
 Set bits in a number.
@@ -172,3 +221,8 @@ Set bits in a number.
 
 #### Returns
 the number with the bit(s) set in the given position(s)
+
+### Example
+```lua
+print(bit.set(2, 0) == 3)
+```
