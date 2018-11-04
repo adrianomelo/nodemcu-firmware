@@ -14,6 +14,7 @@
 //
 
 #include "module.h"
+#include "c_stdlib.h"
 #include "lauxlib.h"
 
 #include <unistd.h>
@@ -43,8 +44,16 @@ int tofGetModel(int *model, int *revision);
 int tofReadDistance(void);
 int tofInit(int iChan, int iAddr, int bLongRange);
 
+static int testFunc (lua_State *L) {
+  NODE_DBG("ToF: test\n");
+  lua_pushinteger(L, 123);
+
+  return 1;
+}
+
 static const LUA_REG_TYPE vl53l0x_map[] = {
     { LSTRKEY( "read" ),         LFUNCVAL( tofReadDistance )},
+    { LSTRKEY( "test" ),         LFUNCVAL( testFunc )},
    // { LSTRKEY( "setup" ),        LFUNCVAL( adxl345_setup )},
     { LNILKEY, LNILVAL}
 };
@@ -74,12 +83,12 @@ typedef struct tagSequenceStepTimeouts
     } SequenceStepTimeouts;
 
 // VL53L0X internal registers
-#define REG_IDENTIFICATION_MODEL_ID		0xc0
-#define REG_IDENTIFICATION_REVISION_ID		0xc2
-#define REG_SYSRANGE_START			0x00
+#define REG_IDENTIFICATION_MODEL_ID             0xc0
+#define REG_IDENTIFICATION_REVISION_ID          0xc2
+#define REG_SYSRANGE_START                      0x00
 
-#define REG_RESULT_INTERRUPT_STATUS 		0x13
-#define RESULT_RANGE_STATUS      		0x14
+#define REG_RESULT_INTERRUPT_STATUS 		        0x13
+#define RESULT_RANGE_STATUS      		            0x14
 #define ALGO_PHASECAL_LIM                       0x30
 #define ALGO_PHASECAL_CONFIG_TIMEOUT            0x30
 
@@ -273,7 +282,7 @@ unsigned char ucTemp;
   {
     if (readReg(0x83) != 0x00) break;
     iTimeout++;
-    usleep(5000);
+    //`usleep(5000);
   }
   if (iTimeout == MAX_TIMEOUT)
   {
@@ -713,7 +722,7 @@ int iTimeout;
   while ((readReg(RESULT_INTERRUPT_STATUS) & 0x07) == 0)
   {
     iTimeout++;
-    usleep(5000);
+    //usleep(5000);
     if (iTimeout > 100) { return 0; }
   }
 
@@ -802,7 +811,7 @@ uint16_t range;
   while ((readReg(RESULT_INTERRUPT_STATUS) & 0x07) == 0)
   {
     iTimeout++;
-    usleep(5000);
+    //usleep(5000);
     if (iTimeout > 50)
     {
       return -1;
@@ -839,7 +848,7 @@ int iTimeout;
   while (readReg(SYSRANGE_START) & 0x01)
   {
     iTimeout++;
-    usleep(5000);
+    //usleep(5000);
     if (iTimeout > 50)
     {
       return -1;
